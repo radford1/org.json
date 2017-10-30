@@ -320,29 +320,13 @@ public class XML {
 // If it might be a number, try converting it. If that doesn't work, 
 // return the string.
 
-        try {
-            char initial = string.charAt(0);
-            boolean negative = false;
-            if (initial == '-') {
-                initial = string.charAt(1);
-                negative = true;
-            }
-            if (initial == '0' && string.charAt(negative ? 2 : 1) == '0') {
-                return string;
-            }
-            if ((initial >= '0' && initial <= '9')) {
-                if (string.indexOf('.') >= 0) {
-                    return Double.valueOf(string);
-                } else if (string.indexOf('e') < 0 && string.indexOf('E') < 0) {
-                    Long myLong = new Long(string);
-                    if (myLong.longValue() == myLong.intValue()) {
-                        return new Integer(myLong.intValue());
-                    } else {
-                        return myLong;
-                    }
-                }
-            }
-        }  catch (Exception ignore) {
+         try {
+        	Long myLong=(long) Integer.parseInt(string);
+        	return myLong;
+        }
+        catch(NumberFormatException e)
+        {
+        	
         }
         return string;
     }
